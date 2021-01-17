@@ -10,11 +10,13 @@ from passvalid import functions
 
 
 ## Output text
-valid_text = "VALID. The password matches the requirements."
-error_len = "INVALID. Length does not match the requirements."
-error_letters = "INVALID. Quantity of letters does not match the requirements."
-error_numbers = "INVALID. Quantity of numbers does not match the requirements."
-error_specials = "INVALID. Quantity of specials characters does not match the requirements."
+valid_password = "VALID PASSWORD."
+invalid_password = "INVALID PASSWORD."
+valid_text = "The password matches the requirements."
+error_len = "Length does not match the requirements."
+error_letters = "Quantity of letters does not match the requirements."
+error_numbers = "Quantity of numbers does not match the requirements."
+error_specials = "Quantity of specials characters does not match the requirements."
 
 
 def validator(password, req):
@@ -35,19 +37,31 @@ def validator(password, req):
     for i in range(len(requirements)):
         if requirements[i] == 'LEN':
             len_is_valid = functions.validate_len(password, operations[i], integers[i])
+
             if not len_is_valid:
-                return error_len
+                print(f"INFO: {error_len}")
+                return invalid_password
+
         elif requirements[i] == 'LETTERS':
             letters_is_valid = functions.validate_letters(password, operations[i], integers[i])
+
             if not letters_is_valid:
-                return error_letters
+                print(f"INFO: {error_letters}")
+                return invalid_password
+
         elif requirements[i] == 'NUMBERS':
             numbers_is_valid = functions.validate_numbers(password, operations[i], integers[i])
+
             if not numbers_is_valid:
-                return error_numbers
+                print(f"INFO: {error_numbers}")
+                return invalid_password
+
         elif requirements[i] == 'SPECIALS':
             specials_is_valid = functions.validate_specials(password, operations[i], integers[i])
+
             if not specials_is_valid:
-                return error_specials
+                print(f"INFO: {error_specials}")
+                return invalid_password
     
-    return valid_text
+    print(f"INFO: {valid_text}")
+    return valid_password
