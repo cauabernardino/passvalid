@@ -10,6 +10,20 @@ import string
 special_chars = string.punctuation
 
 
+def comparisons(act_integer, operation, req_integer):
+    """
+    Handles the comparisons between the requirements and password params.
+    The operations (str) are: <, >, =
+    """
+
+    if operation == '<':
+        return act_integer < req_integer
+    elif operation == '>':
+        return act_integer > req_integer
+    else:
+        return act_integer == req_integer     
+
+
 def split_req(requirements):
     """Separate the requirements, operation and integers from the tuples"""
     reqs = []
@@ -26,12 +40,8 @@ def split_req(requirements):
 
 def validate_len(password, operation, integer):
     """Validates the password's length"""
-    if operation == '<':
-        return len(password) < integer
-    elif operation == '>':
-        return len(password) > integer
-    else:
-        return len(password) == integer       
+
+    return comparisons(len(password), operation, integer)     
 
 
 def validate_letters(password, operation, integer):
@@ -42,12 +52,7 @@ def validate_letters(password, operation, integer):
         if letter.isalpha():
             qty += 1
     
-    if operation == '<':
-        return qty < integer
-    elif operation == '>':
-        return qty > integer
-    else:
-        return qty == integer
+    return comparisons(qty, operation, integer) 
 
 
 def validate_numbers(password, operation, integer):
@@ -58,12 +63,7 @@ def validate_numbers(password, operation, integer):
         if number.isnumeric():
             qty += 1
 
-    if operation == '<':
-        return qty < integer
-    elif operation == '>':
-        return qty > integer
-    else:
-        return qty == integer
+    return comparisons(qty, operation, integer) 
 
 
 def validate_specials(password, operation, integer):
@@ -74,9 +74,4 @@ def validate_specials(password, operation, integer):
         if special in special_chars:
             qty += 1
 
-    if operation == '<':
-        return qty < integer
-    elif operation == '>':
-        return qty > integer
-    else:
-        return qty == integer
+    return comparisons(qty, operation, integer) 
